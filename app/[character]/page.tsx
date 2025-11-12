@@ -2,6 +2,7 @@
 
 import CharacterCard from "@/components/common/CharacterCard";
 import ErrorCard from "@/components/common/ErrorCard";
+import { translate } from "@/lib/translate";
 import { Character } from "@/types/global";
 import { useQuery } from "@tanstack/react-query";
 import { Loader, TriangleAlertIcon } from "lucide-react";
@@ -36,7 +37,13 @@ export default function CharacterPage() {
   );
 }
 
-const getCharacterById = async (id?: number) => {
+const getCharacterById = async (id?: number): Promise<Character> => {
   const res = await fetch(`https://dragonball-api.com/api/characters/${id}`);
-  return res.json();
+  const data = (await res.json()) as Character;
+  const translation = translate(data.id.toString(), data.description);
+
+  return {
+    ...data,
+    description: (await translation).translations[0].translated.join(" "),
+  };
 };

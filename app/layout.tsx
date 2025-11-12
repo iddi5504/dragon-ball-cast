@@ -31,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <Suspense fallback={<Loader className="animate-spin" size={40}></Loader>}>
+    <Suspense fallback={<Loader className="animate-spin" size={40}></Loader>}>
+      <html lang="en">
         <QueryClientProvider client={client}>
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white `}
@@ -53,7 +53,7 @@ export default function RootLayout({
             {children}
           </body>
         </QueryClientProvider>
-      </Suspense>
-    </html>
+      </html>
+    </Suspense>
   );
 }
