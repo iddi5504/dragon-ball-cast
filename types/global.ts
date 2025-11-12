@@ -47,3 +47,13 @@ export type ApiResponse<T> = {
         totalPages: number
     }
 }
+
+
+export type TranslationResponse = {
+    translations: {
+        to: string
+        translated: string[]
+    }[]
+    from: string
+    translated_characters: number
+}

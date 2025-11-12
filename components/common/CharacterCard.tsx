@@ -69,9 +69,9 @@ export default function CharacterCard({
         <p className="text-gray-600">
           {character.race} • {character.gender}
         </p>
-        <p className="mt-2 text-gray-800">
-          {character.description.slice(0, 150)}...
-        </p>
+        {expand && (
+          <p className="mt-2 text-gray-800">{character.description}</p>
+        )}
         <div className="mt-3 text-sm text-gray-700 space-y-1">
           <p>
             <strong>KI:</strong> {character.ki} / {character.maxKi}

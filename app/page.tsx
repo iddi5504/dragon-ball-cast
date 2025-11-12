@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Loader } from "lucide-react";
 import CharacterCard from "@/components/common/CharacterCard";
 import { useRouter, useSearchParams } from "next/navigation";
+import { translate } from "@/lib/translate";
 
 export default function Home() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen py-10">
-      <h1 className="text-4xl text-purple-600 font-bold text-center mb-10">
+      <h1 className="text-3xl text-purple-600 font-bold text-center mb-10">
         Dragon Ball Characters
       </h1>
 
@@ -82,5 +83,7 @@ const fetchCharacters = async (page: string) => {
     }
   );
 
-  return await res.json();
+  const data = (await res.json()) as ApiResponse<Character>;
+
+  return data;
 };
