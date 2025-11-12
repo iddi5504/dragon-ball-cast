@@ -1,3 +1,5 @@
+"use client";
+
 import { TriangleAlertIcon } from "lucide-react";
 
 type props = {

@@ -5,6 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Link from "next/link";
+import { Suspense } from "react";
+import { Loader } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,26 +32,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <QueryClientProvider client={client}>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white `}
-        >
-          <nav className="bg-white py-4">
-            <ul className="flex justify-center">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-700 text-lg font-medium hover:text-purple-600 transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-            </ul>
-          </nav>
+      <Suspense fallback={<Loader className="animate-spin" size={40}></Loader>}>
+        <QueryClientProvider client={client}>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white `}
+          >
+            <nav className="bg-white py-4">
+              <ul className="flex justify-center">
+                <li>
+                  <Link
+                    href="/"
+                    className="text-gray-700 text-lg font-medium hover:text-purple-600 transition-colors"
+                  >
+                    Home
+                  </Link>
+                </li>
+              </ul>
+            </nav>
 
-          {children}
-        </body>
-      </QueryClientProvider>
+            {children}
+          </body>
+        </QueryClientProvider>
+      </Suspense>
     </html>
   );
 }
