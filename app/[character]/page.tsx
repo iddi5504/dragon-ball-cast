@@ -40,10 +40,12 @@ export default function CharacterPage() {
 const getCharacterById = async (id?: number): Promise<Character> => {
   const res = await fetch(`https://dragonball-api.com/api/characters/${id}`);
   const data = (await res.json()) as Character;
-  const translation = translate(data.id.toString(), data.description);
+  const translation = await translate(data.id.toString(), data.description);
 
   return {
     ...data,
-    description: (await translation).translations[0].translated.join(" "),
+    description: translation
+      ? translation.translations[0].translated.join(" ")
+      : data.description,
   };
 };
